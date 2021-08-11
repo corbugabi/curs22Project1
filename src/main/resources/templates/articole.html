@@ -24,16 +24,13 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Informatii</a>
             </li>
-            <form class="form-inline" action="/action_page.php" >
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" >
-                <button class="btn btn-success" type="submit" >Search</button>
-            </form>
         </ul>
     </div>
 </nav>
 
 <div class="container mt-5">
-    <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#articol-modal">Add
+    <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#articol-modal"  id="add-articol-main-button"
+            >Add
         Articol
     </button>
     <input class="form-control" id="myInput" type="text" placeholder="Search..">
@@ -50,13 +47,20 @@
         </thead>
         <tbody>
         <tr data-th-each="articol: ${articole}">
-            <td data-th-text="${articol.id}"></td>
+            <td>
+                <a data-th-href="'/articole/'+${articol.id}" data-th-text="${articol.id}"></a>
+            </td>
             <td data-th-text="${articol.name}"></td>
             <td data-th-text="${articol.description}"></td>
             <td data-th-text="${articol.category}"></td>
             <td>
-                <i class="fas fa-edit mr-2" data-toggle="modal" data-target="#articol-modal"></i>
-                <i class="fas fa-trash-alt"></i>
+                <div data-th-id="${articol.id}" style="cursor: pointer">
+                <i class="fas fa-edit mr-2 edit-icon" data-toggle="modal" data-target="#articol-modal"></i>
+                <i class="fas fa-trash-alt delete-icon"></i>
+                    <a data-th-href="'/articole/'+${articol.id}">
+                        <i class="fas fa-arrow-alt-circle-right"></i>
+                    </a>
+                </div>
             </td>
         </tr>
         </tbody>
@@ -89,7 +93,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="add-articol-button">Save</button>
+                <button type="submit" class="btn btn-primary" data-dismiss="modal" id="add-articol-button">Save</button>
             </div>
         </div>
     </div>
